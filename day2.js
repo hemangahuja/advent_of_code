@@ -9,7 +9,7 @@ function solve(input) {
         ["blue", 14],
         ["green", 13],
         ["red", 12]
-    ]
+    ];
     let answer = 0;
     let answer2 = 0;
     games.forEach(game => {
