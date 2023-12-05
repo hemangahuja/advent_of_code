@@ -2,7 +2,18 @@
 const { readFile } = require("node:fs/promises")
 
 readFile("./input_1.txt").then(solve)
-
+function replaceBulk(str, findArray, replaceArray) {
+    var i, regex = [], map = {};
+    for (i = 0; i < findArray.length; i++) {
+        regex.push(findArray[i].replace(/([-[\]{}()*+?.\\^$|#,])/g, '\\$1'));
+        map[findArray[i]] = replaceArray[i];
+    }
+    regex = regex.join('|');
+    str = str.replace(new RegExp(regex, 'g'), function (matched) {
+        return map[matched];
+    });
+    return str;
+}
 function solve(input) {
     const answer1 = String(input).split("\n").map(x => x.split("").map(Number).filter(Boolean)).reduce((p, c) => p + c.at(0) * 10 + c.at(-1), 0);
     console.log(answer1);
@@ -36,9 +47,10 @@ function solve(input) {
             }
         })
         console.log(minKey, maxKey)
-        if (min != Infinity) x = x.replace(minKey, mapping[minKey]);
-        if (max != -Infinity) x = x.replace(new RegExp(maxKey + '$'), mapping[maxKey]);
-        return x;
+        const p = [], l = [];
+        if (min != Infinity) { p.push(minKey); l.push(mapping[minKey]); }
+        if (max != -Infinity) { p.push(maxKey); l.push(mapping[maxKey]); }
+        return replaceBulk(x, p, l);
     }
 
     const fixedInput = String(input).split("\n").map(replace);

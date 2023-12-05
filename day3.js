@@ -62,9 +62,6 @@ function solve(input) {
     }
     console.log(ans);
 
-    const ans2 = Object.values(mapping).reduce((p, c) => {
-        if (c.length == 2) { return p + c.at(0) * c.at(1); }
-        return p;
-    }, 0);
+    const ans2 = Object.values(mapping).filter(x => x.length == 2).reduce((p, c) => p + c.at(0) * c.at(1), 0)
     console.log(ans2);
 }
