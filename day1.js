@@ -46,7 +46,6 @@ function solve(input) {
                 maxKey = e;
             }
         })
-        console.log(minKey, maxKey)
         const p = [], l = [];
         if (min != Infinity) { p.push(minKey); l.push(mapping[minKey]); }
         if (max != -Infinity) { p.push(maxKey); l.push(mapping[maxKey]); }
