@@ -10,18 +10,15 @@ function better(seed, ranges) {
     return seed;
 }
 function findMin(seeds, ranges) {
-    console.log(seeds);
-    const answer2 = seeds.reduce((soFar, start, idx) => {
-        if (idx % 2 == 1) return soFar;
-        for (let i = start; i < start + seeds[idx + 1]; i++) {
-            soFar = Math.min(soFar, ranges.reduce(better, i));
-        }
-        console.log(soFar);
-        return soFar;
-    }, Infinity)
 
-    return answer2;
+    let soFar = Infinity;
+    for (let i = seeds[0]; i < seeds[0] + seeds[1]; i++) {
+        soFar = Math.min(soFar, ranges.reduce(better, i));
+    }
+    console.log(soFar);
+    return soFar;
 }
+
 
 
 parentPort.postMessage(findMin(workerData.seeds, workerData.ranges))

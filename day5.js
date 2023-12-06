@@ -19,7 +19,8 @@ function solve(input) {
         return Math.min(soFar, ranges.reduce(better, seed));
     }, Infinity);
 
-    // console.log(final);
+    console.log(final);
+
 
     for (let i = 0; i < seeds.length; i += 2) {
         const worker = new Worker("./day5_worker.js", {
